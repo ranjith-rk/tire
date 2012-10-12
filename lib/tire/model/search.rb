@@ -129,7 +129,7 @@ module Tire
         # It will also execute any `<after|before>_update_elasticsearch_index` callback hooks.
         #
         def update_index
-          instance.send :_run_update_elasticsearch_index_callbacks do
+          #instance.send :_run_update_elasticsearch_index_callbacks do
             if instance.destroyed?
               index.remove instance
             else
@@ -141,7 +141,7 @@ module Tire
               instance.matches  = response['matches']  if instance.respond_to?(:matches=)
               self
             end
-          end
+          #end
         end
         alias :update_elasticsearch_index  :update_index
         alias :update_elastic_search_index :update_index
@@ -260,8 +260,8 @@ module Tire
 
           # Define _Tire's_ callbacks (<after|before>_update_elasticsearch_index).
           #
-          define_model_callbacks(:update_elasticsearch_index, :only => [:after, :before]) if \
-            respond_to?(:define_model_callbacks)
+          #define_model_callbacks(:update_elasticsearch_index, :only => [:after, :before]) if \
+          #  respond_to?(:define_model_callbacks)
 
           # Serialize the model as a Hash.
           #
