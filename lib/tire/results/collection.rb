@@ -64,9 +64,19 @@ module Tire
           end
         end
       end
-
+      
+      # Iterates over the `results` collection
+      #
       def each(&block)
         results.each(&block)
+      end
+
+      # Iterates over the `results` collection and yields
+      # the `result` object (Item or model instance) and the
+      # `hit` -- raw Elasticsearch response parsed as a Hash
+      #
+      def each_with_hit(&block)
+        results.zip(@response['hits']['hits']).each(&block)
       end
 
       def empty?
