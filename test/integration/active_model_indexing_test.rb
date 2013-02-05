@@ -35,7 +35,7 @@ module Tire
                    :id      => 1, 
                    :title   => 'Test article',
                    :content => 'Lorem Ipsum. Dolor Sit Amet.'
-        @model.update_index
+        @model.update_index_es
         @model.index.refresh
       end
 

@@ -478,7 +478,7 @@ bootstrapping the application with Rake tasks or when setting up the test suite.
 _Tire_ will not hold that against you.
 
 You may have just stopped wondering: what if I have my own `settings` class method defined?
-Or what if some other gem defines `settings`, or some other _Tire_ method, such as `update_index`?
+Or what if some other gem defines `settings`, or some other _Tire_ method, such as `update_index_es`?
 Things will break, right? No, they won't.
 
 In fact, all this time you've been using only _proxies_ to the real _Tire_ methods, which live in the `tire`
@@ -486,7 +486,7 @@ class and instance methods of your model. Only when not trampling on someone's f
 of cases —, will _Tire_ bring its methods to the namespace of your class.
 
 So, instead of writing `Article.search`, you could write `Article.tire.search`, and instead of
-`@article.update_index` you could write `@article.tire.update_index`, to be on the safe side.
+`@article.update_index_es` you could write `@article.tire.update_index_es`, to be on the safe side.
 Let's have a look on an example with the `mapping` method:
 
 ```ruby
@@ -569,7 +569,7 @@ control on how the documents are added to or removed from the index:
       include Tire::Model::Search
 
       after_save do
-        update_index if state == 'published'
+        update_index_es if state == 'published'
       end
     end
 ```

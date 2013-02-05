@@ -264,14 +264,14 @@ module Tire
 
         should "fire :after_save callbacks" do
           @model = ActiveModelArticleWithCallbacks.new
-          @model.tire.expects(:update_index)
+          @model.tire.expects(:update_index_es)
 
           @model.save
         end
 
         should "fire :after_destroy callbacks" do
           @model = ActiveModelArticleWithCallbacks.new
-          @model.tire.expects(:update_index)
+          @model.tire.expects(:update_index_es)
 
           @model.destroy
         end

@@ -18,8 +18,8 @@ module Tire
         # Update index on model instance change or destroy.
         #
         if base.respond_to?(:after_save) && base.respond_to?(:after_destroy)
-          base.send :after_save,    lambda { tire.update_index }
-          base.send :after_destroy, lambda { tire.update_index }
+          base.send :after_save,    lambda { tire.update_index_es }
+          base.send :after_destroy, lambda { tire.update_index_es }
         end
 
         # Add neccessary infrastructure for the model, when missing in

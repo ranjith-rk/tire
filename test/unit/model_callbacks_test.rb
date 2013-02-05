@@ -56,7 +56,7 @@ module Tire
 
         should "not execute any callbacks" do
           m = ModelOne.new
-          m.tire.expects(:update_index).never
+          m.tire.expects(:update_index_es).never
 
           m.save
           m.destroy
@@ -68,7 +68,7 @@ module Tire
 
         should "execute the callbacks" do
           m = ModelTwo.new
-          m.tire.expects(:update_index).twice
+          m.tire.expects(:update_index_es).twice
 
           m.save
           m.destroy
@@ -84,7 +84,7 @@ module Tire
 
         should "execute the callbacks" do
           m = ModelThree.new
-          m.tire.expects(:update_index).twice
+          m.tire.expects(:update_index_es).twice
 
           m.save
           m.destroy
@@ -94,14 +94,14 @@ module Tire
 
       context "Model without Tire::Callbacks included" do
 
-        should "respond to Tire update_index callbacks" do
+        should "respond to Tire update_index_es callbacks" do
           assert_respond_to ModelWithoutTireAutoCallbacks, :after_update_elasticsearch_index
           assert_respond_to ModelWithoutTireAutoCallbacks, :before_update_elasticsearch_index
         end
 
-        should "not execute the update_index hooks" do
+        should "not execute the update_index_es hooks" do
           m = ModelWithoutTireAutoCallbacks.new
-          m.tire.expects(:update_index).never
+          m.tire.expects(:update_index_es).never
 
           m.save
           m.destroy
