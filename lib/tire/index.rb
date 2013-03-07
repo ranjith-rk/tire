@@ -125,7 +125,7 @@ module Tire
     def import(klass_or_collection, options={})
       case
         when method = options.delete(:method)
-          options = {:page => 1, :per_page => 1000}.merge options
+          options = {:page => 1, :per_page => 500}.merge options
           while documents = klass_or_collection.send(method.to_sym, options.merge(:page => options[:page])) \
                             and documents.to_a.length > 0
 
