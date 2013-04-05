@@ -15,9 +15,9 @@ module Tire
           Response.new e.http_body, e.http_code
         end
 
-        def self.post(url, data)
+        def self.post(url, data, timeout=60)
           # Setting the timeout to -1
-          perform ::RestClient::Request.new(:method => :post, :url => url, :payload => data, :timeout => -1).execute
+          perform ::RestClient::Request.new(:method => :post, :url => url, :payload => data, :timeout => timeout).execute
         rescue *ConnectionExceptions
           raise
         rescue ::RestClient::Exception => e
