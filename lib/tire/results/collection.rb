@@ -56,7 +56,7 @@ module Tire
                                  "based on _type '#{type}'.", e.backtrace
               end
               ids = items.map { |h| h['_id'] }
-              records[type] = @options[:load] === true ? klass.find(ids) : klass.find(ids, @options[:load])
+              records[type] = __find_records_by_ids klass, ids
             end
 
             # Reorder records to preserve order from search results
@@ -116,6 +116,14 @@ module Tire
           fields.update result
         end
         fields
+      end
+
+      def __find_records_by_ids(klass, ids)
+        if defined?(ActiveRecord::Base) && klass < ActiveRecord::Base
+          @options[:load] === true ? klass.find_all_by_id(ids) : klass.find_all_by_id(ids, @options[:load])
+        else
+          @options[:load] === true ? klass.find(ids) : klass.find(ids, @options[:load])
+        end
       end
 
     end
